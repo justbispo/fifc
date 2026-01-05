@@ -3,7 +3,8 @@ set -gx _fifc_comp_count 0
 set -gx _fifc_unordered_comp
 set -gx _fifc_ordered_comp
 
-if status is-interactive
+function _fifc_set_bindings --on-variable fish_key_bindings
+
     # Keybindings
     set -qU fifc_keybinding
     or set -U fifc_keybinding \t
@@ -31,6 +32,10 @@ if status is-interactive
     fifc \
         -n 'test "$fifc_group" = processes' \
         -s 'ps -ax -o pid=,command='
+end
+
+if status is-interactive
+    _fifc_set_bindings
 end
 
 # Load fifc preview rules only when fish is launched fzf
