@@ -41,7 +41,7 @@ function _fifc
             --preview '_fifc_action preview {} {q}' \
             --bind='$fifc_open_keybinding:execute(_fifc_action open {} {q} &> /dev/tty)' \
             --query '$fifc_safe_query' \
-            $_fifc_custom_fzf_opts"
+            $fifc_custom_fzf_opts"
 
     set -l cmd (string join -- " | " $source_cmd $fzf_cmd)
     # We use eval hack because wrapping source command
