@@ -27,6 +27,18 @@ function _fifc_completion_group -d "Determine completion group"
         echo options
         # PIDs
     else if string join -- '' $complist | string match --regex --quiet '^[0-9]+$'
-        echo processes
+        set -l candidates (_fifc_expand_tilde (_fifc_parse_complist))
+        set -l pid_commands kill pstree ps pmap gdb strace ltrace
+        set -l words (string split -- ' ' (string trim -- $fifc_commandline))
+        set -l command $words[1]
+        # Skip wrappers like `sudo kill`
+        if test "$command" = sudo -o "$command" = doas -o "$command" = run0
+            set command $words[2]
+        end
+        if contains -- "$command" $pid_commands
+            echo processes
+        else if not test -e "$candidates[1]"
+            echo processes
+        end
     end
 end
