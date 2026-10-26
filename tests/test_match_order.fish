@@ -1,5 +1,6 @@
 set curr_fifc_unordered_comp $_fifc_unordered_comp
 set curr_fifc_ordered_comp $_fifc_ordered_comp
+set -e _fifc_ordered_comp
 set dir "tests/_resources/dir with spaces"
 set _fifc_complist_path (mktemp)
 
